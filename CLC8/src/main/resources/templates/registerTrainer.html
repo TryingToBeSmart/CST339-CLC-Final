@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+  <head> </head>
+  <body>
+    <div layout:fragment="content">
+      <form action="/home.html" th:action="@{/doRegisterTrainer}" th:object="${trainerModel}" method="POST">
+        <h1>Trainer Registration</h1>
+        <div class="card-body py-2 px-md-5" style="width: 40%;">
+          <form class="form-outline mb-4">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" th:field="*{firstName}" class="form-control" />
+                <label class="form-label">First Name</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
+              </div>
+              <div class="col">
+                <input type="text" th:field="*{lastName}" class="form-control" />
+                <label class="form-label">Last Name</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+            	<div class="col-md">
+                	<input type="text" th:field="*{trainerID}" class="form-control" />
+                	<label class="form-label">Employee ID</label>
+               	 	<p style="color: red;" th:if="${#fields.hasErrors('trainerID')}" th:errors="*{age}">Trainer ID error</p>
+            	</div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" th:field="*{username}" class="form-control" />
+                  <label class="form-label">Username</label>
+                  <p style="color: red;" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" th:field="*{password}" class="form-control" />
+                  <label class="form-label">Password</label>
+                  <p style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</p>
+                </div>
+              </div>
+            </div>
+
+
+            <input class="btn btn-primary btn-block mb-4" type="submit" value="Register" />
+          </form>
+        </div>
+
+<!-- 
+        <div th:if="${#fields.hasErrors('*')}">List of Errors</div>
+        <div th:each="err : ${#fields.errors('*')}">
+          <span style="color: red;" th:text="${err}" class="fieldErrors"></span>
+           -->
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

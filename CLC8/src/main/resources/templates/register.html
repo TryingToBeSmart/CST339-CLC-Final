@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+  <head> </head>
+  <body>
+    <div layout:fragment="content">
+      <form action="/home.html" th:action="@{/doRegister}" th:object="${registerModel}" method="POST">
+        <h1>Register</h1>
+        <div class="card-body py-2 px-md-5" style="width: 40%;">
+          <form class="form-outline mb-4">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" th:field="*{firstName}" class="form-control" />
+                <label class="form-label">First Name</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
+              </div>
+              <div class="col">
+                <input type="text" th:field="*{lastName}" class="form-control" />
+                <label class="form-label">Last Name</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-5">
+                <input type="text" th:field="*{age}" class="form-control" />
+                <label class="form-label">Age</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</p>
+              </div>
+              <div class="col">
+                <input type="text" th:field="*{weight}" class="form-control" />
+                <label class="form-label">Weight</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Weight error</p>
+              </div>
+              <div class="col">
+                <input type="text" th:field="*{height}" class="form-control" />
+                <label class="form-label">Height</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('height')}" th:errors="*{height}">Height error</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" th:field="*{username}" class="form-control" />
+                  <label class="form-label">Username</label>
+                  <p style="color: red;" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</p>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" th:field="*{password}" class="form-control" />
+                  <label class="form-label">Password</label>
+                  <p style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</p>
+                </div>
+              </div>
+            </div>
+
+            <input class="btn btn-primary btn-block mb-4" type="submit" value="Register" />
+          </form>
+        </div>
+
+        <div th:if="${#fields.hasErrors('*')}">List of Errors</div>
+        <div th:each="err : ${#fields.errors('*')}">
+          <span style="color: red;" th:text="${err}" class="fieldErrors"></span>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+  <head>
+    <link rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+    crossorigin="anonymous" />
+    <style type="text/css">
+      .bs-example {
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      
+      <form action="/trainer/workouts.html" th:action="@{/trainer/workouts/add}" th:object="${workoutModel}" method="POST">
+        <h1>Create New Workout</h1>
+        <div class="card-body py-2 px-md-5" style="width: 40%;">
+          <form class="form-outline mb-4">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" th:field="*{name}" class="form-control" />
+                <label class="form-label">Workout Name</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</p>
+              </div>
+              <div class="col">
+                <input type="text" th:field="*{caloriesPerSet}" class="form-control" />
+                <label class="form-label">Calories Per Set</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('caloriesPerSet')}" th:errors="*{caloriesPerSet}">Calories Per Set error</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-5">
+                <input type="text" th:field="*{timePerSet}" class="form-control" />
+                <label class="form-label">Time Per Set</label>
+                <p style="color: red;" th:if="${#fields.hasErrors('timePerSet')}" th:errors="*{timePerSet}">Time Per Set error</p>
+              </div>
+            </div>
+            
+            <input class="btn btn-primary btn-block mb-4" type="submit" value="Create Workout" />
+          </form>
+          
+          <a th:href="@{/trainer/workouts}" class="btn btn-primary">Back to workouts</a>
+    </div>
+  </body>
+</html>

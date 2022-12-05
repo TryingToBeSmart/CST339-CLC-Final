@@ -1,0 +1,93 @@
+<!--Page that displays workouts that have been made with an option to create a new workout-->
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+  <head>
+    <link rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+    crossorigin="anonymous" />
+    <style type="text/css">
+      .bs-example {
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div layout:fragment="content">
+ <h2>Client Info</h2>  
+    <table style="width:50%">
+	<thead>
+		<tr>
+			<th style="text-align:center">Client First Name</th>
+			<th style="text-align:center">Client Last Name</th>
+			<th style="text-align:center">Client Age</th>
+			<th style="text-align:center">Client Height</th>
+			<th style="text-align:center">Client Weight</th>
+		<th>
+	</thead>
+	<tbody>
+		<tr th:if="${client == null}">
+			<td style="text-align:center" colspan="4"> No Clients Available </td>
+		</tr>
+			<td style="text-align: center"><h5 th:text="${client.firstName}">Tom</h5></td>
+			<td style="text-align: center"><h5 th:text="${client.lastName}">Smith</h5></td>
+			<td style="text-align: center"><h5 th:text="${client.age}">20</h5></td>
+			<td style="text-align: center"><h5 th:text="${client.height}">20</h5></td>
+			<td style="text-align: center"><h5 th:text="${client.weight}">20</h5></td>
+		</tr>
+	</tbody>
+</table>
+<br>
+<h2>Assigned Workouts</h2>
+<table style="width:50%">
+	<thead>
+		<tr>
+			<th style="text-align:center">Workout Name</th>
+			<th style="text-align:center">Calories Per Set</th>
+			<th style="text-align:center">Time Per Set</th>
+			<th style="text-align:center">Status</th>
+			<th style="text-align:center">Date Complete</th>
+		<th>
+	</thead>
+	<tbody>
+		<tr th:each="workout : ${userworkouts}">
+			<td style="text-align: center"><h5 th:text="${workout.name}">Tom</h5></td>
+			<td style="text-align: center"><h5 th:text="${workout.caloriesPerSet}">Smith</h5></td>
+			<td style="text-align: center"><h5 th:text="${workout.timePerSet}">20</h5></td>
+			<td style="text-align: center"><h5 th:text="${workout.status}">20</h5></td>
+			<td style="text-align: center"><h5 th:text="${workout.dateComplete}">20</h5></td>
+		</tr>
+	</tbody>
+</table>
+<br>
+<h2>Add Workouts</h2>
+	<a th:href="@{/trainer/clients/view/{id}(id=${client.accountID})}" class="btn btn-primary">Back to Client</a>
+	<a th:href="@{/trainer/workouts/add}" class="btn btn-primary">Make new workout</a>
+<br><br>
+
+<table style="width:50%">
+	<thead>
+		<tr>
+			<th style="text-align:center">Workout Name</th>
+			<th style="text-align:center">Calories Per Set</th>
+			<th style="text-align:center">Time Per Set</th>
+			<th style="text-align:center">Add to Client</th>
+		<th>
+	</thead>
+	<tbody>
+	<tr th:if="${addworkouts.empty}">
+			<td style="text-align:center" colspan="4"> No Workouts Available </td>
+	</tr>
+
+		<tr th:each="workout : ${addworkouts}">
+			<td style="text-align: center"><h5 th:text="${workout.name}">Squats</h5></td>
+			<td style="text-align: center"><h5 th:text="${workout.caloriesPerSet}">50</h5></td>
+			<td style="text-align: center"><h5 th:text="${workout.timePerSet}">1:15</h5></td>
+			<td style="text-align: center"><a th:href="@{/trainer/clients/addWorkout/{id}/{workoutId}(id=${client.accountID},workoutId=${workout.Id})}"><img th:src="@{/images/plusIcon.png}" style="width: 15px; height:15px;"></a></td>			
+		</tr>
+	</tbody>
+</table>
+    
+    </div>
+  </body>
+</html>

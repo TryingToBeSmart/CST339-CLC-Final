@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+  <head> </head>
+  <body>
+    <div layout:fragment="content">
+   <div th:if="${param.error}">
+   Invalid Username Or Password 
+   </div>
+      <form th:action="@{/login}" method="POST">
+        <h1>Login</h1>
+        <div class="card-body py-2 px-md-5" style="width: 40%;">
+          <form class="form-outline mb-4">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" name="username" id="username" placeholder"UserName" required />
+                <label class="form-label">Username</label>
+              </div>
+              <div class="col">
+                <input type="password" class="form-control" name="password" id="password" placeholder"Password" required />
+                <label class="form-label">Password</label>
+              </div>
+            </div>
+            <input class="btn btn-primary btn-block mb-4" type="submit" value="Sign In" />
+          </form>
+ 			
+ 		<div th:if="${failedLogin == true}">
+            <h4 style="color: red;">Account Not Found</h4>
+         </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
