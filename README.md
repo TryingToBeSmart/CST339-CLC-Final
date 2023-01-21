@@ -6,4 +6,4 @@ Database uses MySQL.
 
 Maven dependencies.
 
-Secure password is standart HTML for REST API, 
+Secure password is standard HTTP for REST API, password encryption for trainers and clients stored on SQL database.
